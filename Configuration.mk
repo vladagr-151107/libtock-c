@@ -93,6 +93,7 @@ TOCK_TARGETS ?= cortex-m0\
                 cortex-m3\
                 cortex-m4\
                 cortex-m7\
+                cortex-m33\
                 rv32imac|rv32imac.0x20040080.0x80002800|0x20040080|0x80002800\
                 rv32imc|rv32imc.0x41000080.0x42008000|0x41000080|0x42008000\
                 rv32imc|rv32imc.0x00080080.0x40008000|0x00080080|0x40008000\
@@ -561,6 +562,7 @@ TOOLCHAIN_cortex-m0 := $(TOOLCHAIN_cortex-m)
 TOOLCHAIN_cortex-m3 := $(TOOLCHAIN_cortex-m)
 TOOLCHAIN_cortex-m4 := $(TOOLCHAIN_cortex-m)
 TOOLCHAIN_cortex-m7 := $(TOOLCHAIN_cortex-m)
+TOOLCHAIN_cortex-m33 := $(TOOLCHAIN_cortex-m)
 
 # Setup the correct compiler. For cortex-m we only support GCC as it is the only
 # toolchain with the PIC support we need for Tock userspace apps.
@@ -569,6 +571,7 @@ CC_cortex-m0 := $(CC_cortex-m)
 CC_cortex-m3 := $(CC_cortex-m)
 CC_cortex-m4 := $(CC_cortex-m)
 CC_cortex-m7 := $(CC_cortex-m)
+CC_cortex-m33 := $(CC_cortex-m)
 
 # Determine the version of the ARM compiler. This is used to select the version
 # of the libgcc library that is compatible.
@@ -597,6 +600,7 @@ NEWLIB_VERSION_cortex-m0 := $(NEWLIB_VERSION_cortex-m)
 NEWLIB_VERSION_cortex-m3 := $(NEWLIB_VERSION_cortex-m)
 NEWLIB_VERSION_cortex-m4 := $(NEWLIB_VERSION_cortex-m)
 NEWLIB_VERSION_cortex-m7 := $(NEWLIB_VERSION_cortex-m)
+NEWLIB_VERSION_cortex-m33 := $(NEWLIB_VERSION_cortex-m)
 NEWLIB_BASE_DIR_cortex-m := $(TOCK_USERLAND_BASE_DIR)/lib/libtock-newlib-$(NEWLIB_VERSION_cortex-m)
 
 # Match compiler version to supported libtock-libc++ versions.
@@ -619,6 +623,7 @@ LIBCPP_VERSION_cortex-m0 := $(LIBCPP_VERSION_cortex-m)
 LIBCPP_VERSION_cortex-m3 := $(LIBCPP_VERSION_cortex-m)
 LIBCPP_VERSION_cortex-m4 := $(LIBCPP_VERSION_cortex-m)
 LIBCPP_VERSION_cortex-m7 := $(LIBCPP_VERSION_cortex-m)
+LIBCPP_VERSION_cortex-m33 := $(LIBCHPP_VERSION_cortex-m)
 LIBCPP_BASE_DIR_cortex-m := $(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(LIBCPP_VERSION_cortex-m)
 
 # Based on the toolchain used by each architecture, add in toolchain-specific
@@ -633,6 +638,7 @@ override CFLAGS_cortex-m0 += $(CFLAGS_cortex-m)
 override CFLAGS_cortex-m3 += $(CFLAGS_cortex-m)
 override CFLAGS_cortex-m4 += $(CFLAGS_cortex-m)
 override CFLAGS_cortex-m7 += $(CFLAGS_cortex-m)
+override CFLAGS_cortex-m33 += $(CFLAGS_cortex_m)
 
 override CPPFLAGS_cortex-m += \
       $(CPPFLAGS_toolchain_cortex-m)\
@@ -659,6 +665,9 @@ override CPPFLAGS_cortex-m4 += $(CPPFLAGS_cortex-m) \
 
 override CPPFLAGS_cortex-m7 += $(CPPFLAGS_cortex-m) \
       -mcpu=cortex-m7
+
+override CPPFLAGS_cortex-m33 += $(CPPFLAGS_cortex_m) \
+      -mcpu=cortex-m33
 
 override SYSTEM_LIBS_cortex-m0 += \
       $(NEWLIB_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v6-m/nofp/libc.a \
@@ -696,12 +705,22 @@ override SYSTEM_LIBS_CXX_cortex-m7 += \
       $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libsupc++.a \
       $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v7e-m/nofp/libgcc.a
 
+override SYSTEM_LIBS_cortex-m33 += \
+      $(NEWLIB_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a \
+      $(NEWLIB_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a
+
+override SYSTEM_LIBS_CXX_cortex-m33 += \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libstdc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libsupc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v7e-m/nofp/libgcc.a
+
 # Cortex-M needs an additional OBJDUMP flag.
 override OBJDUMP_FLAGS_cortex-m  += --disassembler-options=force-thumb
 override OBJDUMP_FLAGS_cortex-m7 += $(OBJDUMP_FLAGS_cortex-m)
 override OBJDUMP_FLAGS_cortex-m4 += $(OBJDUMP_FLAGS_cortex-m)
 override OBJDUMP_FLAGS_cortex-m3 += $(OBJDUMP_FLAGS_cortex-m)
 override OBJDUMP_FLAGS_cortex-m0 += $(OBJDUMP_FLAGS_cortex-m)
+override OBJDUMP_FLAGS_cortex-m33 += $(OBJDUMP_FLAGS_cortex-m)
 
 
 ################################################################################
