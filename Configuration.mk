@@ -623,7 +623,7 @@ LIBCPP_VERSION_cortex-m0 := $(LIBCPP_VERSION_cortex-m)
 LIBCPP_VERSION_cortex-m3 := $(LIBCPP_VERSION_cortex-m)
 LIBCPP_VERSION_cortex-m4 := $(LIBCPP_VERSION_cortex-m)
 LIBCPP_VERSION_cortex-m7 := $(LIBCPP_VERSION_cortex-m)
-LIBCPP_VERSION_cortex-m33 := $(LIBCHPP_VERSION_cortex-m)
+LIBCPP_VERSION_cortex-m33 := $(LIBCPP_VERSION_cortex-m)
 LIBCPP_BASE_DIR_cortex-m := $(TOCK_USERLAND_BASE_DIR)/lib/libtock-libc++-$(LIBCPP_VERSION_cortex-m)
 
 # Based on the toolchain used by each architecture, add in toolchain-specific
@@ -638,7 +638,7 @@ override CFLAGS_cortex-m0 += $(CFLAGS_cortex-m)
 override CFLAGS_cortex-m3 += $(CFLAGS_cortex-m)
 override CFLAGS_cortex-m4 += $(CFLAGS_cortex-m)
 override CFLAGS_cortex-m7 += $(CFLAGS_cortex-m)
-override CFLAGS_cortex-m33 += $(CFLAGS_cortex_m)
+override CFLAGS_cortex-m33 += $(CFLAGS_cortex-m)
 
 override CPPFLAGS_cortex-m += \
       $(CPPFLAGS_toolchain_cortex-m)\
@@ -666,7 +666,7 @@ override CPPFLAGS_cortex-m4 += $(CPPFLAGS_cortex-m) \
 override CPPFLAGS_cortex-m7 += $(CPPFLAGS_cortex-m) \
       -mcpu=cortex-m7
 
-override CPPFLAGS_cortex-m33 += $(CPPFLAGS_cortex_m) \
+override CPPFLAGS_cortex-m33 += $(CPPFLAGS_cortex-m) \
       -mcpu=cortex-m33
 
 override SYSTEM_LIBS_cortex-m0 += \
