@@ -706,13 +706,13 @@ override SYSTEM_LIBS_CXX_cortex-m7 += \
       $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v7e-m/nofp/libgcc.a
 
 override SYSTEM_LIBS_cortex-m33 += \
-      $(NEWLIB_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libc.a \
-      $(NEWLIB_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libm.a
+      $(NEWLIB_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v8-m.main/nofp/libc.a \
+      $(NEWLIB_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v8-m.main/nofp/libm.a
 
 override SYSTEM_LIBS_CXX_cortex-m33 += \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libstdc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v7e-m/nofp/libsupc++.a \
-      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v7e-m/nofp/libgcc.a
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v8-m.main/nofp/libstdc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/arm-none-eabi/lib/thumb/v8-m.main/nofp/libsupc++.a \
+      $(LIBCPP_BASE_DIR_cortex-m)/arm/lib/gcc/arm-none-eabi/$(LIBCPP_VERSION_cortex-m)/thumb/v8-m.main/nofp/libgcc.a
 
 # Cortex-M needs an additional OBJDUMP flag.
 override OBJDUMP_FLAGS_cortex-m  += --disassembler-options=force-thumb
